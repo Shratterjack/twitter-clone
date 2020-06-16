@@ -1,18 +1,19 @@
 <template>
   <div id="app-body">
-    <app-tweet-input></app-tweet-input>
-    <app-tweet></app-tweet>
-    <app-tweet></app-tweet>
-    <app-tweet></app-tweet>
+    <!-- <app-home></app-home> -->
+    <app-follow></app-follow>
   </div>
 </template>
 <script>
-import TweetInput from "../tweet/TweetInput.vue"
-import Tweet from "../tweet/Tweet.vue"
+
+import Home from '../Home'
+import Profile from '../users/Profile'
+import FollowUsers from '../FollowUsers'
 export default {
   components: {
-    "app-tweet-input": TweetInput,
-    "app-tweet": Tweet
+    "app-home": Home,
+    "app-profile": Profile,
+    "app-follow": FollowUsers,
   }
 };
 </script>
