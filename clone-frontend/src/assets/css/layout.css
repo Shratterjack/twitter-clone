@@ -1,0 +1,21 @@
+.onboardClass{
+    text-align: center !important;
+}
+
+.onboardForm{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:150px;
+    position: relative;
+}
+
+.login-header{
+    font-weight: normal;
+}
+
+.textStyle{
+    font-size: 19px;
+}
