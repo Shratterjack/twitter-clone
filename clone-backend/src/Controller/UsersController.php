@@ -18,7 +18,6 @@ class UsersController extends AppController
             $user = $this->Users->newEmptyEntity();
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($user->getErrors()) {
-                // Entity failed validation.
                 $error = $user->getErrors();
                 $result['error'] = $error;
             }
@@ -34,16 +33,6 @@ class UsersController extends AppController
         $response = $this->response->withStringBody(json_encode($result));
         return $response;
     }
-
-    // public function profile(){
-    //     $this->autoRender = false;
-    //     $this->request->allowMethod(['get']);
-    //     $getData = $this->request->getData();
-    //     $result = $this->Users->findAllByEmail($getData['email'])->toArray();
-    //     $this->response = $this->response->withType('application/json');
-    //     $response = $this->response->withStringBody(json_encode($result));
-    //     return $response;
-    // }
 
     public function profile(){
         $this->autoRender = false;
@@ -89,6 +78,21 @@ class UsersController extends AppController
     public function login(){
         $this->autoRender = false;
         $this->request->allowMethod(['post']);
+        $result = [
+            'status'=>false,
+            'info'=>''
+        ];
         $postdata = $this->request->getData();
+        $query = $this->Users->findByEmail($postdata['email'])->toArray();
+        if($query[0]->password == $postdata['password']){
+             $result = [
+                'status'=>true,
+                'info'=>'Logged in',
+                'message'=>$query
+            ];
+        }
+        $this->response = $this->response->withType('application/json');
+        $response = $this->response->withStringBody(json_encode($result));
+        return $response;
     }
 }
