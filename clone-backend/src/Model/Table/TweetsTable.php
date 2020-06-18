@@ -3,17 +3,14 @@
 // src/Model/Table/TweetsTable.php
 namespace App\Model\Table;
 
-use Cake\Event\EventInterface;
-// the Text class
-use Cake\ORM\Table;
 // the EventInterface class
-use Cake\Utility\Text;
+use Cake\Event\EventInterface;
+
+use Cake\ORM\Table;
 // the Validator class
 use Cake\Validation\Validator;
 
 use Cake\ORM\TableRegistry;
-
-use Cake\Collection\Collection;
 
 use Cake\ORM\Query;
 
@@ -22,7 +19,6 @@ class TweetsTable extends Table
 {
     public function initialize(array $config): void
     {
-        // $this->belongsTo('Users');
         $this->belongsTo('Users', [
             'className' => 'Users',
             'foreignKey' => 'user_id',
@@ -40,7 +36,6 @@ class TweetsTable extends Table
     }
 
     
-
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -51,6 +46,7 @@ class TweetsTable extends Table
         return $validator;
     }
 
+    // fetches the tweets of the other users followed 
     public function findFollowerTweets(Query $query,array $options){
         $connectionTable = TableRegistry::getTableLocator()->get('Connections');
         $subquery = $connectionTable->find()

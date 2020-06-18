@@ -67,7 +67,7 @@
             <app-tweet></app-tweet>
         </div>
       </div>
-    </div>
+  </div>
   <!-- </div> -->
 </template>
 <script>
