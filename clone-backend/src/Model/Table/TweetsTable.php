@@ -53,11 +53,18 @@ class TweetsTable extends Table
         ->select(['Connections.recipent_id'])
         ->where(['user_id IS' =>$options['userId']]);
 
+        // ->where([
+        // 'OR' => [['user_id IS' =>$options['userId']], ['view_count' => 3]],
+        // ]);
+
 
         $query = $this->find()
         ->select(['Tweets.tweet_id','Tweets.tweet','Tweets.tweet_date','Users.email','Users.username'])
         ->contain(['Users'])
-        ->where(['id IN' => $subquery])
+         ->where([
+        'OR' => [['id IN' => $subquery], ['id IS' => $options['userId']]],
+        ])
+        // ->where(['id IN' => $subquery])
         ->order(['Tweets.tweet_date' => 'DESC']);
 
         return $query;

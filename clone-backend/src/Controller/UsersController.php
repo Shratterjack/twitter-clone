@@ -19,9 +19,9 @@ class UsersController extends AppController
 
     public function add(){
         $this->autoRender = false;
-        $this->request->allowMethod(['post']);
         $postdata = $this->request->getData();
-        if ($postdata['password'] == $postdata['confirmPassword']) {
+        if($this->request->is('post')){
+            if($postdata['password'] == $postdata['confirmPassword']) {
             $result = [
                 'status'=>false,
                 'info'=>''
@@ -40,9 +40,11 @@ class UsersController extends AppController
                 $result['info'] = 'An Error Occured!';
             }
         }
-        $this->response = $this->response->withType('application/json');
-        $response = $this->response->withStringBody(json_encode($result));
-        return $response;
+            $this->response = $this->response->withType('application/json');
+            $response = $this->response->withStringBody(json_encode($result));
+            return $response;
+        }
+      
     }
 
     public function profile(){

@@ -14,6 +14,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <app-navigate></app-navigate>
+        <button class="btn btn-outline-light my-2 my-sm-0" @click="logout" type="button">Logout</button>
+
     </nav>
 </div>
 </template>
@@ -22,6 +24,13 @@ import Navigation from '../common/Navigation'
 export default {
     components:{
         'app-navigate':Navigation
+    },
+    methods:{
+      logout(){
+        let userdetail = localStorage.getItem("userdetail");
+        localStorage.removeItem('userdetail');
+        this.$router.push('/login')
+      }
     }
 }
 </script>

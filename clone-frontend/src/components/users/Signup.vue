@@ -1,6 +1,6 @@
 <template>
     <div id="app-signup" class="onboardClass">
-    <form class="onboardForm">
+    <form class="onboardForm" @submit="signupUser">
     <div class="mb-3">
         <span class="h3 login-header">Sign up for Twitter-Clone</span>
     </div>
@@ -19,6 +19,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
     data(){
         return {
@@ -29,10 +30,30 @@ export default {
         }
     },
     methods:{
-        signupUser(){
-            let userdetails = `Email: ${this.email}, Password:${this.password}`;
-            alert(userdetails);
-            // this.$router.push('/si')
+        signupUser(event){
+            event.preventDefault();
+            var that = this;
+            axios({
+                method: 'post',
+                url: 'http://localhost/users/add.json',
+                data: {
+                    username:this.name,
+                    email: this.email,
+                    password: this.password,
+                    confirmPassword: this.confirmPassword,
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(function (response) {
+                let result = response.data;
+                alert(result.info);
+                if(result.status){
+                    that.$router.push('/login');
+                }
+            }).catch(error=>{
+                console.log(error);
+            });
         }
     }
 }
