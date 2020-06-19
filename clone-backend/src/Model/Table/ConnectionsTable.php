@@ -15,8 +15,8 @@ class ConnectionsTable extends Table
     {
         $this->belongsToMany('Users', [
             'className' => 'Users',
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
+            // 'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
             
         $this->setPrimaryKey('connection_id');

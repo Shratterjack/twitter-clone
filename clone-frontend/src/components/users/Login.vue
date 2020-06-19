@@ -41,8 +41,8 @@ export default {
                 let result = response.data;
                 alert(result.info);
                 if(result.status){
-                    Window.localStorage.setItem('userdetail', JSON.stringify(result.message));
-                    that.$router.push('/home')
+                    localStorage.setItem('userdetail', JSON.stringify(result.message));
+                    that.$router.push('/home');
                 }
             }).catch(error=>{
                 console.log(error);

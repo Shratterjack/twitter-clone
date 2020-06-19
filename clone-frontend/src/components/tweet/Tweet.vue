@@ -4,18 +4,18 @@
       <div class="card-body">
         <div class="media">
           <div class="media-body">
-            <h6>Dyanne Aceron</h6>
-            <span class="d-block">Cigarette Butt Collector</span>
+            <h6>{{ tweet['user'].username }}</h6>
+            <span class="d-block">{{ tweet['user'].email }}</span>
           </div>
-          <span>5 hours ago</span>
+          <span>{{ tweet.tweet_date }}</span>
         </div>
-        <p>Our team is expanding again. We are looking for a Product Manager and Software Engineer to drive our new aspects of our capital projects. If you're interested, please drop a comment here or simply message me.</p>
+        <p>{{ tweet.tweet }}</p>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-    
+    props:['tweet']
 }
 </script>

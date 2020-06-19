@@ -9,6 +9,8 @@ import FollowUsers from '../components/FollowUsers.vue'
 
 Vue.use(Router)
 
+// var userId
+
 export default new Router({
     mode:'history',
     routes:[
@@ -19,7 +21,7 @@ export default new Router({
             path: '/signup', component: Signup
         },
         {
-            path: '/home', component: Home
+            path: '/home', component: Home, props: { id: 1 }
         },
         {
             path: '/profile', component: Profile

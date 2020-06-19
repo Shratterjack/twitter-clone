@@ -15,7 +15,6 @@ class UsersController extends AppController
             ->exposeHeaders(['Link'])
             ->maxAge(300)
             ->build();
-
     }
 
     public function add(){
@@ -119,7 +118,7 @@ class UsersController extends AppController
         else{
             $result = [
                 'status'=>false,
-                'info'=>"User Doesn'st exist!"
+                'info'=>"User Doesn't exist!"
             ];
         }
         $this->response = $this->response->withType('application/json');
@@ -127,5 +126,26 @@ class UsersController extends AppController
         return $response;
         }
   
+    }
+
+    public function suggest(){
+        $this->autoRender = false;
+        $this->request->allowMethod(['get']);
+        $getData = $this->request->getQueryParams();
+        $suggestions = $this->Users->find('suggestions',[
+                'userId'=>$getData['userId']
+        ]);
+
+        $followed =  $this->Users->find('followed',[
+                'userId'=>$getData['userId']
+        ]);
+        
+        $result = [];
+        $result['suggestions'] = $suggestions;
+        $result['followed'] = $followed;
+         
+        $this->response = $this->response->withType('application/json');
+        $response = $this->response->withStringBody(json_encode($result));
+        return $response;
     }
 }

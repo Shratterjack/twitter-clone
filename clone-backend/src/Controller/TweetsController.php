@@ -2,8 +2,20 @@
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
 
 class TweetsController extends AppController{
+
+    public function beforeFilter(EventInterface $event){
+        $this->response = $this->response->cors($this->request)
+        ->allowOrigin(['*'])
+        ->allowMethods(['*'])
+        ->allowHeaders(['*'])
+        ->allowCredentials()
+        ->exposeHeaders(['Link'])
+        ->maxAge(300)
+        ->build();
+    }
 
     public function add(){
         $this->autoRender = false;
@@ -34,13 +46,15 @@ class TweetsController extends AppController{
 
     public function fetch(){
         $this->autoRender = false;
-        $this->request->allowMethod(['get']);
-        $getData = $this->request->getQueryParams();
-        $query = $this->Tweets->find('followertweets',[
-            'userId'=>$getData['userId']
-        ])->toArray();
-        $this->response = $this->response->withType('application/json');
-        $response = $this->response->withStringBody(json_encode($query));
-        return $response;
+        // $this->request->allowMethod(['get']);
+        if($this->request->is('get')){
+            $getData = $this->request->getQueryParams();
+            $query = $this->Tweets->find('followertweets',[
+                'userId'=>$getData['userId']
+            ])->toArray();
+            $this->response = $this->response->withType('application/json');
+            $response = $this->response->withStringBody(json_encode($query));
+            return $response;
+        }
     }
 }

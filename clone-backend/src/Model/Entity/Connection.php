@@ -8,7 +8,7 @@ class Connection extends Entity{
     protected $_accessible = [
         '*' => false,
         'connection_id' => false,
-        'sender_id' => true,
+        'user_id' => true,
         'recipent_id' => true,
         'follow_date' => false,
     ];

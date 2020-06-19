@@ -55,7 +55,7 @@ class TweetsTable extends Table
 
 
         $query = $this->find()
-        ->select(['Tweets.tweet_id','Tweets.tweet','Users.email'])
+        ->select(['Tweets.tweet_id','Tweets.tweet','Tweets.tweet_date','Users.email','Users.username'])
         ->contain(['Users'])
         ->where(['id IN' => $subquery])
         ->order(['Tweets.tweet_date' => 'DESC']);

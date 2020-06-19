@@ -1,18 +1,17 @@
 <template>
   <div id="app-profile">
-    <!-- <div class="container"> -->
       <div class="row">
         <div class="col-sm-10">
           <h1>User name</h1>
         </div>
         <div class="col-sm-2">
-          <a href="/users" class="pull-right">
+          <!-- <a href="/users" class="pull-right"> -->
             <img
               title="profile image"
               class="img-circle img-responsive"
               src="https://bootdey.com/img/Content/avatar/avatar1.png"
             />
-          </a>
+          <!-- </a> -->
         </div>
       </div>
       <div class="row">
@@ -64,7 +63,8 @@
           </ul>
         </div>
         <div class="col-sm-9">
-            <app-tweet></app-tweet>
+            <!-- <app-tweet></app-tweet> -->
+        <app-tweet v-for="tweet in tweets" :key="tweet.tweet_id" :tweet="tweet" ></app-tweet>
         </div>
       </div>
   </div>
@@ -72,9 +72,44 @@
 </template>
 <script>
 import Tweet from '../tweet/Tweet'
+import axios from 'axios'
 export default {
   components: {
     "app-tweet": Tweet
+  },
+   data: function () {
+    return {
+      tweets:null,
+    }
+  },
+  mounted(){
+    var that = this;
+    axios({
+        method: 'get',
+        url: 'http://localhost/users/profile.json',
+        params: {
+          userId: 1
+        },
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then(function (response) {
+        let userTweetData = response.data[0].tweets;
+        let tweetData = userTweetData.map((data,index)=>{
+            let inner = {};
+            inner = {...data};
+            inner['user'] = {};
+            inner['user'].id = response.data[0].id;
+            inner['user'].username = response.data[0].username;
+            inner['user'].email = response.data[0].email;
+            inner['user'].created_date = response.data[0].created_date;
+            return inner;
+        });
+        that.tweets = tweetData;
+        console.log(response.data);
+    }).catch(error=>{
+        console.log(error);
+    });
   }
 };
 </script>
