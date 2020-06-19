@@ -19,8 +19,9 @@ class TweetsController extends AppController{
 
     public function add(){
         $this->autoRender = false;
-        $this->request->allowMethod(['post']);
-        $postdata = $this->request->getData();
+        // $this->request->allowMethod(['post']);
+        if($this->request->is('post')){
+             $postdata = $this->request->getData();
             $result = [
                 'status'=>false,
                 'info'=>''
@@ -42,6 +43,7 @@ class TweetsController extends AppController{
         $this->response = $this->response->withType('application/json');
         $response = $this->response->withStringBody(json_encode($result));
         return $response;
+        }
     }
 
     public function fetch(){

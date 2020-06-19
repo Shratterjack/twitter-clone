@@ -20,7 +20,7 @@ export default {
   name:'app',
   data:function () {
     return{
-      userdetail:null,
+      userdetail:JSON.parse(localStorage.getItem("userdetail")),
       bodyStyle:''
     }
   },
@@ -54,4 +54,5 @@ export default {
 /* #app-body {
   padding: 5rem;
 } */
+
 </style>

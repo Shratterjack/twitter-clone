@@ -9,7 +9,10 @@ import FollowUsers from '../components/FollowUsers.vue'
 
 Vue.use(Router)
 
-// var userId
+let userdetail = localStorage.getItem("userdetail");
+if(userdetail !== null){
+    userdetail = JSON.parse(localStorage.getItem("userdetail"))
+}
 
 export default new Router({
     mode:'history',
@@ -21,13 +24,13 @@ export default new Router({
             path: '/signup', component: Signup
         },
         {
-            path: '/home', component: Home, props: { id: 1 }
+            path: '/home', component: Home, props: { id: userdetail[0].id }
         },
         {
-            path: '/profile', component: Profile
+            path: '/profile', component: Profile, props: { id: userdetail[0].id }
         },
         {
-            path: '/suggestions', component: FollowUsers
+            path: '/suggestions', component: FollowUsers, props: { id: userdetail[0].id }
         }
     ]
 });

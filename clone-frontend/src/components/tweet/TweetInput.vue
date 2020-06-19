@@ -11,7 +11,7 @@
 <script>
 import axios from 'axios';
 export default {
-    props:['post'],
+    props:['post','id'],
     data:function (params) {
         return{
             input:null
@@ -23,12 +23,13 @@ export default {
             this.$emit('postChanged',this.input)
         },
         postTweet(){
+            var that = this;
             axios({
-                method: 'get',
+                method: 'post',
                 url: 'http://localhost/tweets/add.json',
                 data: {
-                    tweet: this.input,
-                    user_id:1
+                    tweet: that.input,
+                    user_id:that.id
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,6 +37,7 @@ export default {
             }).then(function (response) {
                 let result = response.data;
                 alert(result.info);
+                that.$emit('tweetPosted')
             }).catch(error=>{
                 console.log(error);
             });

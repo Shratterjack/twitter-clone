@@ -10,6 +10,7 @@ import Suggestion from '../components/common/Suggestion';
 import axios from 'axios';
 
 export default {
+    props:['id'],
     components:{
         'app-suggestion':Suggestion
     },
@@ -24,7 +25,7 @@ export default {
             method: 'get',
             url: 'http://localhost/users/suggest.json',
             params: {
-                userId: 1
+                userId: this.id
             },
             headers: {
                 'Content-Type': 'application/json',

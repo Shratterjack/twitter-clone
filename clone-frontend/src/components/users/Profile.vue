@@ -2,7 +2,7 @@
   <div id="app-profile">
       <div class="row">
         <div class="col-sm-10">
-          <h1>User name</h1>
+          <h1>{{ userdetail[0].username }} </h1>
         </div>
         <div class="col-sm-2">
           <!-- <a href="/users" class="pull-right"> -->
@@ -16,54 +16,25 @@
       </div>
       <div class="row">
         <div class="col-sm-3">
-          <ul class="list-group">
+          <ul class="list-group mt-4">
             <li class="list-group-item text-muted">Profile</li>
             <li class="list-group-item text-right">
               <span class="pull-left">
                 <strong>Joined</strong>
-              </span> 2.13.2014
+              </span> {{ userdetail[0].created_date }}
             </li>
             <li class="list-group-item text-right">
               <span class="pull-left">
-                <strong>Last seen</strong>
-              </span> Yesterday
-            </li>
-            <li class="list-group-item text-right">
-              <span class="pull-left">
-                <strong>Real name</strong>
-              </span> Joseph Doe
+                <strong>Email</strong>
+              </span> {{ userdetail[0].email }}
             </li>
           </ul>
 
-          <ul class="list-group">
-            <li class="list-group-item text-muted">
-              Activity
-              <i class="fa fa-dashboard fa-1x"></i>
-            </li>
-            <li class="list-group-item text-right">
-              <span class="pull-left">
-                <strong>Shares</strong>
-              </span> 125
-            </li>
-            <li class="list-group-item text-right">
-              <span class="pull-left">
-                <strong>Likes</strong>
-              </span> 13
-            </li>
-            <li class="list-group-item text-right">
-              <span class="pull-left">
-                <strong>Posts</strong>
-              </span> 37
-            </li>
-            <li class="list-group-item text-right">
-              <span class="pull-left">
-                <strong>Followers</strong>
-              </span> 78
-            </li>
-          </ul>
         </div>
         <div class="col-sm-9">
             <!-- <app-tweet></app-tweet> -->
+          <h5 class="pl-3">Tweets</h5>
+          <hr>
         <app-tweet v-for="tweet in tweets" :key="tweet.tweet_id" :tweet="tweet" ></app-tweet>
         </div>
       </div>
@@ -74,21 +45,23 @@
 import Tweet from '../tweet/Tweet'
 import axios from 'axios'
 export default {
+  props:['id'],
   components: {
     "app-tweet": Tweet
   },
    data: function () {
     return {
       tweets:null,
+      userdetail:JSON.parse(localStorage.getItem("userdetail"))
     }
   },
-  mounted(){
+  created(){
     var that = this;
     axios({
         method: 'get',
         url: 'http://localhost/users/profile.json',
         params: {
-          userId: 1
+          userId: this.id
         },
         headers: {
             'Content-Type': 'application/json',
