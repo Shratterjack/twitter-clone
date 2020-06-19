@@ -30,6 +30,7 @@ export default {
         let userdetail = localStorage.getItem("userdetail");
         localStorage.removeItem('userdetail');
         this.$router.push('/login')
+        location.reload();
       }
     }
 }

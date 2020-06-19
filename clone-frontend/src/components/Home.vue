@@ -1,7 +1,7 @@
 <template>
   <div id="app-home">
-    <app-tweet-input :id="id" :post="post" @postChanged="post = $event"></app-tweet-input>
-    <app-tweet v-for="tweet in tweets" :key="tweet.tweet_id" :tweet="tweet" @tweetPosted="fetchActivity"></app-tweet>
+    <app-tweet-input :id="id" :post="post" @postChanged="post = $event" @tweetPosted="fetchActivity"></app-tweet-input>
+    <app-tweet v-for="tweet in tweets" :key="tweet.tweet_id" :tweet="tweet" ></app-tweet>
   </div>
 </template>
 <script>
@@ -40,9 +40,10 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
   },
-  created() {
+ 
+  mounted() {
     this.fetchActivity();
   }
 };
