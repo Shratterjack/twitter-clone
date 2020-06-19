@@ -3,14 +3,64 @@
     <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
       <div class="d-flex justify-content-between align-items-center w-100">
         <strong class="text-gray-dark">{{ suggestions['username']}} </strong>
-        <a href="#">Follow</a>
+        <button :disabled="getButtonState" :class="getButtonClass" @click="followUser">{{ getButtonText }}</button>
       </div>
       <span class="d-block">{{ suggestions['email']}}</span>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
-      props:['suggestions']
+      props:['suggestions'],
+      methods:{
+        followUser(){
+            event.preventDefault();
+            var that = this;
+            axios({
+                method: 'post',
+                url: 'http://localhost/users/follow.json',
+                data: {
+                    user_id: 1,
+                    recipent_id: this.suggestions.id
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(function (response) {
+                let result = response.data;
+                alert(result.info)
+                location.reload();
+            }).catch(error=>{
+                console.log(error);
+            });
+        }
+      },
+      computed:{
+        getButtonClass(){
+            let baseClass = 'btn btn-sm';
+            if(this.suggestions.connection){
+              baseClass = `${baseClass} btn-success`;
+            }
+            else{
+                baseClass = `${baseClass} btn-primary`;
+            }
+            return baseClass;
+        },
+        getButtonText(){
+            let baseText = '';
+            if(this.suggestions.connection){
+              baseText = `Following`;
+            }
+            else{
+                baseText = `Follow`;
+            }
+            return baseText;
+        },
+        getButtonState(){
+            let disabled = this.suggestions.connection;
+            return disabled;
+        }
+      }
 }
 </script>

@@ -59,9 +59,9 @@ class UsersController extends AppController
 
     public function follow(){
         $this->autoRender = false;
-        $this->request->allowMethod(['post']);
-        $this->loadModel('Connections');
-        $postdata = $this->request->getData();
+        if($this->request->is('post')){
+            $this->loadModel('Connections');
+            $postdata = $this->request->getData();
             $result = [
                 'status'=>false,
                 'info'=>''
@@ -80,15 +80,15 @@ class UsersController extends AppController
             else{
                 $result['info'] = 'An Error Occured!';
             }
-        $this->response = $this->response->withType('application/json');
-        $response = $this->response->withStringBody(json_encode($result));
-        return $response;
+            $this->response = $this->response->withType('application/json');
+            $response = $this->response->withStringBody(json_encode($result));
+            return $response;
+        }
     }
 
 
     public function login(){
         $this->autoRender = false;
-        // $this->request->allowMethod(['post']);
         if($this->request->is('post')){
             $result = [
             'status'=>false,
