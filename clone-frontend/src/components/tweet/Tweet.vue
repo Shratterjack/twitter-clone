@@ -4,10 +4,12 @@
       <div class="card-body">
         <div class="media">
           <div class="media-body">
-            <h6>{{ tweet['user'].username }}</h6>
-            <span class="d-block">{{ tweet['user'].email }}</span>
+            <p class="font-weight-bold">
+              {{ tweet['user'].username }}
+                <span class="font-weight-light">{{ tweet['user'].email }}</span>
+              </p>
           </div>
-          <span>{{ tweet.tweet_date }}</span>
+          <span>{{ tweet.tweet_date | formatDate}}</span>
         </div>
         <p>{{ tweet.tweet }}</p>
       </div>
@@ -15,7 +17,14 @@
   </div>
 </template>
 <script>
+// import moment from 'moment';
+import moment from 'moment-timezone';
 export default {
-    props:['tweet']
+    props:['tweet'],
+    filters:{
+      formatDate(value){
+        return moment.tz(value, "Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+      }
+    }
 }
 </script>

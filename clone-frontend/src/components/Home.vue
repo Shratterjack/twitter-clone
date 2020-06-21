@@ -34,13 +34,13 @@ export default {
           "Content-Type": "application/json"
         }
       })
-        .then(function(response) {
-          that.tweets = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
+      .then(function(response) {
+        that.tweets = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
   },
  
   mounted() {
