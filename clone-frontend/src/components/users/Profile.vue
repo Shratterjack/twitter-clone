@@ -18,12 +18,12 @@
         <div class="col-sm-3">
           <ul class="list-group mt-4">
             <li class="list-group-item text-muted">Profile</li>
-            <li class="list-group-item text-right">
+            <li class="list-group-item">
               <span class="pull-left">
                 <strong>Joined</strong>
-              </span> {{ userdetail[0].created_date }}
+              </span> {{ userdetail[0].created_date  | formatDate  }}
             </li>
-            <li class="list-group-item text-right">
+            <li class="list-group-item">
               <span class="pull-left">
                 <strong>Email</strong>
               </span> {{ userdetail[0].email }}
@@ -44,6 +44,7 @@
 <script>
 import Tweet from '../tweet/Tweet'
 import axios from 'axios'
+import moment from 'moment-timezone';
 export default {
   props:['id'],
   components: {
@@ -83,6 +84,11 @@ export default {
     }).catch(error=>{
         console.log(error);
     });
+  },
+  filters:{
+      formatDate(value){
+        return moment.tz(value, "Asia/Kolkata").format("DD-MM-YYYY HH:mm:ss");
+      }
   }
 };
 </script>

@@ -9,7 +9,7 @@
                 <span class="font-weight-light">{{ tweet['user'].email }}</span>
               </p>
           </div>
-          <span>{{ tweet.tweet_date | formatDate}}</span>
+          <span>{{ tweet.tweet_date | formatDate }}</span>
         </div>
         <p>{{ tweet.tweet }}</p>
       </div>
