@@ -12,7 +12,7 @@
 <script>
 import axios from 'axios';
 export default {
-      props:['suggestions'],
+      props:['suggestions','id'],
       methods:{
         followUser(){
             event.preventDefault();
@@ -21,7 +21,7 @@ export default {
                 method: 'post',
                 url: 'http://localhost/users/follow.json',
                 data: {
-                    user_id: 1,
+                    user_id: this.id,
                     recipent_id: this.suggestions.id
                 },
                 headers: {
