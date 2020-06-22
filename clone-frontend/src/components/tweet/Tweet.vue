@@ -23,7 +23,7 @@ export default {
     props:['tweet'],
     filters:{
       formatDate(value){
-        return moment.tz(value, "Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+        return moment.tz(value, "Asia/Kolkata").format("DD-MM-YYYY HH:mm:ss");
       }
     }
 }

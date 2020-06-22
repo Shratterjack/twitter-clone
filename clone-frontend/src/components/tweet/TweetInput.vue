@@ -2,7 +2,7 @@
     <div class="my-3 p-3 rounded box-shadow" id="app-tweet-input">
         <form>
             <div class="form-group tweetInput">
-                <textarea :placeholder="post" :value="input" @input="changeInput" class="form-control" id="tweetInput" rows="3"></textarea>
+                <textarea placeholder="What's Happening" :value="input" @input="changeInput" class="form-control" id="tweetInput" rows="3"></textarea>
                 <button class="btn btn-sm btn-primary tweetButton" type="button" @click="postTweet">Tweet</button>
             </div>
         </form>
@@ -37,6 +37,7 @@ export default {
             }).then(function (response) {
                 let result = response.data;
                 alert(result.info);
+                that.input = null;
                 that.$emit('tweetPosted')
             }).catch(error=>{
                 console.log(error);

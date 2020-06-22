@@ -1,6 +1,10 @@
 <template>
   <div id="app-home">
     <app-tweet-input :id="id" :post="post" @postChanged="post = $event" @tweetPosted="fetchActivity"></app-tweet-input>
+    <div>
+      <h5>Latest Activity</h5>
+      <hr>
+    </div>
     <app-tweet v-for="tweet in tweets" :key="tweet.tweet_id" :tweet="tweet" ></app-tweet>
   </div>
 </template>
@@ -43,7 +47,7 @@ export default {
     }
   },
  
-  mounted() {
+  created() {
     this.fetchActivity();
   }
 };
