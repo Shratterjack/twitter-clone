@@ -30,7 +30,7 @@ export default {
     "app-profile": Profile,
     "app-suggestion": FollowUsers,
   },
-  mounted(){
+  created(){
     let userdetail = JSON.parse(localStorage.getItem("userdetail"));
     if(userdetail == null){
       this.$router.push('/login')
