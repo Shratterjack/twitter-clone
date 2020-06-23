@@ -44,7 +44,6 @@ export default {
                     localStorage.setItem('userdetail', JSON.stringify(result.message));
                     that.$router.push('/home');
                     location.reload();
-
                 }
             }).catch(error=>{
                 console.log(error);

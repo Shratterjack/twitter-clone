@@ -12,7 +12,7 @@
       <input type="password" v-model="password" id="password" class="form-control mt-2" placeholder="Password" required>
         <label for="password" class="sr-only">Confirm Password</label>
       <input type="password" v-model="confirmPassword" id="confirmPassword" class="form-control mt-2" placeholder="Confirm Password" required>
-      <button class="btn btn-lg btn-primary btn-block mt-2" type="button" @click="signupUser">Sign up</button>
+      <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">Sign up</button>
         <router-link to="/login">Already have an account? Log in</router-link>
 
     </form>
