@@ -2,7 +2,7 @@
     <div id="app-follow" class="my-3 p-3 bg-white rounded box-shadow">
         <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
 
-        <app-suggestion v-for="user in suggestions" :key="user.id" :suggestions="user" :id="id"></app-suggestion>
+        <app-suggestion v-for="user in suggestions" :key="user.id" :suggestions="user" :id="id" @connectionMade="fetchSuggestions"></app-suggestion>
     </div>
 </template>
 <script>
@@ -19,8 +19,9 @@ export default {
             suggestions:null
         }
     },
-    mounted(){
-        var that = this;
+    methods:{
+        fetchSuggestions(){
+             var that = this;
         axios({
             method: 'get',
             url: 'http://localhost/users/suggest.json',
@@ -52,6 +53,10 @@ export default {
         }).catch(error=>{
             console.log(error);
         });
+        }
+    },
+    mounted(){
+       this.fetchSuggestions()
     }
 }
 </script>

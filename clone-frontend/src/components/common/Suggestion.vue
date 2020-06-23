@@ -30,7 +30,8 @@ export default {
             }).then(function (response) {
                 let result = response.data;
                 alert(result.info)
-                location.reload();
+                that.$emit('connectionMade');
+                // location.reload();
             }).catch(error=>{
                 console.log(error);
             });
