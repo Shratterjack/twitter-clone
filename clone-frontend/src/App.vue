@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div v-if="userdetail !== null">
-       <app-navbar></app-navbar>
+       <app-navbar @appLogout="userdetail = null"></app-navbar>
     </div>
     <main role="main" class="container">
-        <div id="app-body" v-bind:style="bodyStyle">
+        <div id="app-body" v-bind:style="changeBodyStyle">
             <router-view></router-view>
         </div>
     </main>
@@ -30,16 +30,24 @@ export default {
     "app-profile": Profile,
     "app-suggestion": FollowUsers,
   },
-  created(){
+  mounted(){
     let userdetail = JSON.parse(localStorage.getItem("userdetail"));
     if(userdetail == null){
       this.$router.push('/login')
     }
     else{
       this.userdetail = userdetail;
-      this.bodyStyle = {
-        padding: '5rem'
-      };
+    }
+  },
+  computed:{
+    changeBodyStyle(){
+      let bodyStyle = '';
+      if(this.userdetail !== null){
+        bodyStyle = {
+          padding: '5rem'
+        };
+      }
+      return bodyStyle
     }
   }
 };

@@ -29,8 +29,9 @@ export default {
       logout(){
         let userdetail = localStorage.getItem("userdetail");
         localStorage.removeItem('userdetail');
+        this.$emit('appLogout');
         this.$router.push('/login')
-        location.reload();
+        // location.reload();
       }
     }
 }

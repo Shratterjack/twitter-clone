@@ -31,7 +31,6 @@ export default {
                 let result = response.data;
                 alert(result.info)
                 that.$emit('connectionMade');
-                // location.reload();
             }).catch(error=>{
                 console.log(error);
             });
